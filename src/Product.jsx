@@ -2,7 +2,7 @@ import { Box, Button, Container, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import SliderC from "./sliderC";
+import SliderC from "./sliderC.jsx";
 
 const Product = () => {
   let params = useParams().id;

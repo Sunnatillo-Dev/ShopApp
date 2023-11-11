@@ -1,23 +1,21 @@
-import { Box } from '@chakra-ui/react'
-import React from 'react'
-import Header from './Header/Header'
-import Carousel from './Carousel/Carousel'
-import Cards from './Cards/Cards'
-import Brands from './Brands/Brands'
-import About from './About/About'
-import Footer from './Footer/Footer'
-import Posters from './Posters/Posters'
+import { Box } from "@chakra-ui/react";
+import React from "react";
+import Carousel from "./Carousel/Carousel.jsx";
+import Cards from "./Cards/Cards.jsx";
+import Brands from "./Brands/Brands.jsx";
+import About from "./About/About.jsx";
+import Posters from "./Posters/Posters.jsx";
 
 const App = () => {
   return (
     <Box>
-        <Carousel/>
-        <Cards/>
-        <Brands/>
-        <About/>
-        <Posters/>
+      <Carousel />
+      <Cards />
+      <Brands />
+      <About />
+      <Posters />
     </Box>
-  )
-}
+  );
+};
 
-export default App
+export default App;

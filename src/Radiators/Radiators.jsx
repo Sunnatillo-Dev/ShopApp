@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai";
-import Rcards from "../R-Cards";
+import Rcards from "../R-Cards.jsx";
 import bn1 from "../assets/image/bn1.png";
 import bn2 from "../assets/image/bn2.png";
 let Filter = ({ text, max, min }) => {
