@@ -7,11 +7,11 @@ import Routers from "./routes/Routes.jsx";
 import { ParamsContext } from "./Context/Context.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <ParamsContext>
+  <ChakraProvider>
     <BrowserRouter>
-      <ChakraProvider>
+      <ParamsContext>
         <Routers />
-      </ChakraProvider>
+      </ParamsContext>
     </BrowserRouter>
-  </ParamsContext>
+  </ChakraProvider>
 );
