@@ -1,7 +1,9 @@
-import { Box, Grid, GridItem, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Grid, GridItem, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { RiShoppingCart2Line } from "react-icons/ri";
+import ParamContext from "./Context/Context";
 
 const Rcards = () => {
   const [data, setState] = useState([]);
@@ -10,16 +12,27 @@ const Rcards = () => {
       .get("https://dummyjson.com/products")
       .then((result) => setState(result.data.products));
   }, []);
+
   let ToOtherPage = useNavigate();
+  let { PageID, setPageID } = useContext(ParamContext);
+
+  const isItemInBasket = (itemId) => PageID.includes(itemId);
+
+  const handleAddToBasket = (itemId) => {
+    localStorage.setItem("PageID", PageID);
+    setPageID([...PageID, itemId]);
+  };
+
   return (
-    <Box maxW={1000}>
+    <Box maxW={"1600px"}>
       <Grid gap={"20px"} templateColumns={"repeat(3,1fr)"}>
         {data.slice(0, 12).map((item) => {
+          const isInBasket = isItemInBasket(item.id);
+
           return (
             <GridItem
-              onClick={() => ToOtherPage(`/radiators/${item.id}`)}
               width={"400px"}
-              height={"471px"}
+              height={"530px"}
               key={item.id}
               borderRadius={"5px"}
               backgroundColor={"white"}
@@ -80,6 +93,39 @@ const Rcards = () => {
                     {item.price} ₽
                   </Text>
                 </Box>
+              </Box>
+              <Box
+                mt={"10px"}
+                display={"flex"}
+                justifyContent={"space-between"}
+              >
+                <Button
+                  leftIcon={<RiShoppingCart2Line />}
+                  colorScheme="teal"
+                  size="md"
+                  onClick={() => handleAddToBasket(item.id)}
+                  display={isInBasket ? "none" : "block"}
+                >
+                  Add to Basket
+                </Button>
+                <Button
+                  colorScheme="teal"
+                  size="md"
+                  width={isInBasket ? "100%" : "auto"}
+                  fontSize="md"
+                  fontWeight="bold"
+                  borderRadius="md"
+                  onClick={() =>
+                    ToOtherPage(
+                      isInBasket ? `/basket` : `/radiators/${item.id}`
+                    )
+                  }
+                  _hover={{
+                    bg: "teal.600",
+                  }}
+                >
+                  {isInBasket ? "Go To Basket" : "Buy"}
+                </Button>
               </Box>
             </GridItem>
           );

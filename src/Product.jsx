@@ -17,9 +17,9 @@ const Product = () => {
   let images = Array.isArray(data.images) ? [...data.images] : [];
 
   return (
-    <Container display={"flex"} gap={"25px"} maxW={"1600px"}>
+    <Container mt={30} display={"flex"} gap={"25px"} maxW={"1600px"}>
       <SliderC images={images} />
-      <Box py={"40px"} display={"flex"} flexDir={"column"} >
+      <Box py={"40px"} display={"flex"} flexDir={"column"}>
         <Box display={"flex"} flexDir={"column"} gap={"15px"}>
           <Text fontSize={"36px"}>{data.title}</Text>
           <Text fontSize={"30px"} fontWeight={"900"} width={"350px"}>
@@ -30,7 +30,7 @@ const Product = () => {
           </Text>
           <Text fontSize={"20px"} fontWeight={"900"} width={"350px"}>
             Rating:{" "}
-            <Text display={"inline"} fontWeight={"500"}>
+            <Text as={"span"} display={"inline"} fontWeight={"500"}>
               {data.rating} / 5
             </Text>
           </Text>

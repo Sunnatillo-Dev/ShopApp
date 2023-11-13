@@ -4,11 +4,14 @@ import "./index.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import Routers from "./routes/Routes.jsx";
+import { ParamsContext } from "./Context/Context.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
-    <ChakraProvider>
-      <Routers />
-    </ChakraProvider>
-  </BrowserRouter>
+  <ParamsContext>
+    <BrowserRouter>
+      <ChakraProvider>
+        <Routers />
+      </ChakraProvider>
+    </BrowserRouter>
+  </ParamsContext>
 );

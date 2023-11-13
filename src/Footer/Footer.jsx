@@ -8,15 +8,17 @@ import { CiLocationOn } from "react-icons/ci";
 const Footer = () => {
   return (
     <Box
-      maxW={"1920px"}
-      height={"412px"}
+      width={"100%"}
+      bottom={0}
+      margin={"0 auto"}
+      mt={50}
+      height={"312px"}
       bg={"#3A8F34"}
       display={"flex"}
       justifyContent={"space-around"}
       alignItems={"center"}
-      m={"90px 0 0"}
     >
-      <Flex flexDirection={"column"} gap={"68px"}>
+      <Flex maxW={"100vw"} flexDirection={"column"} gap={"68px"}>
         <Box display={"flex"} flexDirection={"column"} gap={"43px"}>
           <Box>
             <Text color={"white"} fontSize={30}>

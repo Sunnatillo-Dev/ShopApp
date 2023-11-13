@@ -3,11 +3,16 @@ import { BsTelephone, BsSearch } from "react-icons/bs";
 import { CiLocationOn } from "react-icons/ci";
 import { LuCalculator } from "react-icons/lu";
 import { AiOutlineArrowDown, AiOutlineShoppingCart } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { RiShoppingCart2Line } from "react-icons/ri";
+import { useContext } from "react";
+import ParamContext from "../Context/Context";
 
 function Header() {
+  let navigate = useNavigate();
+  let { PageID } = useContext(ParamContext);
   return (
-    <Box pt={"40px"} bg={"#fff"}>
+    <Box width={"100%"} mb={"20px"} py={"40px"} bg={"#fff"}>
       <Container maxW={1600} m={"0 auto"}>
         <Flex alignItems={"center"} justify={"space-between"}>
           <Box>
@@ -20,7 +25,7 @@ function Header() {
             <Flex flexDirection={"column"} gap={5}>
               <Text fontSize={20}>+7 (977) 837-12-45</Text>
               <Text fontSize={14}>mail@mail.ru</Text>
-              <a>Заказать звонок</a>
+              <a>Products:</a>
             </Flex>
             <Box>
               <CiLocationOn color="green" fontSize={30} />
@@ -70,7 +75,7 @@ function Header() {
             <AiOutlineArrowDown />
           </Flex>
           <Flex>
-            <Text>Полотенцесушители</Text>
+            <Text>Полотенцесушители </Text>
             <AiOutlineArrowDown />
           </Flex>
           <Flex>
@@ -98,13 +103,31 @@ function Header() {
           <Flex>
             <Text>контакты</Text>
           </Flex>
-          <Box>
-            <AiOutlineShoppingCart fontSize={24} color="green" />
+          <Box position={"relative"}>
+            <RiShoppingCart2Line
+              cursor={"pointer"}
+              onClick={() => navigate("/basket")}
+              fontSize={24}
+              color="green"
+            />
+            <Text
+              userSelect={"none"}
+              top={"-7px"}
+              backgroundColor={"green"}
+              width={"20px"}
+              height={"20px"}
+              borderRadius={"50px"}
+              textAlign={"center"}
+              color={"white"}
+              right={"-7px"}
+              position={"absolute"}
+            >
+              {PageID.length}
+            </Text>
           </Box>
         </Flex>
       </Container>
     </Box>
   );
 }
-
 export default Header;

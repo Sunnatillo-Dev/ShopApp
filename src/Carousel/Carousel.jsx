@@ -12,8 +12,6 @@ const Carousel = () => {
 
   const settings = {
     dots: false,
-    infinite: true,
-    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
@@ -28,7 +26,7 @@ const Carousel = () => {
   };
 
   return (
-    <div style={{ position: "relative", margin: "38px 0 0" }}>
+    <div style={{ position: "relative", margin: "38px 0 0" ,width:"100%"}}>
       <Slider {...settings} ref={sliderRef}>
         <div>
           <Image
