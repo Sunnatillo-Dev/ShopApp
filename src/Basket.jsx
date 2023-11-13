@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
 import React, { useContext, useEffect, useState } from "react";
 import ParamContext from "./Context/Context";
 import { Box, Button, Container, Image, Text } from "@chakra-ui/react";

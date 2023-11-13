@@ -1,6 +1,6 @@
 import { Box, Container, Grid, GridItem, Image, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 const Cards = () => {
   const [state, setState] = useState([]);
@@ -30,7 +30,12 @@ const Cards = () => {
                 backgroundColor={"white"}
                 p={"30px"}
               >
-                <Image objectFit={"cover"} width={"312px"} height={"287px"} src={item.thumbnail} />
+                <Image
+                  objectFit={"cover"}
+                  width={"312px"}
+                  height={"287px"}
+                  src={item.thumbnail}
+                />
                 <Text m={"25px 0 0"} textAlign={"center"}>
                   {item.title}
                 </Text>

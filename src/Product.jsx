@@ -1,5 +1,6 @@
 import { Box, Button, Container, Text } from "@chakra-ui/react";
-import axios from "axios";
+import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SliderC from "./sliderC.jsx";
