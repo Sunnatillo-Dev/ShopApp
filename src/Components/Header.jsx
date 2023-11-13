@@ -113,7 +113,7 @@ function Header() {
             <Text
               userSelect={"none"}
               top={"-7px"}
-              backgroundColor={"green"}
+              backgroundColor={PageID.length ? "green" : ""}
               width={"20px"}
               height={"20px"}
               borderRadius={"50px"}
@@ -122,7 +122,7 @@ function Header() {
               right={"-7px"}
               position={"absolute"}
             >
-              {PageID.length}
+              {PageID.length ? PageID.length : ""}
             </Text>
           </Box>
         </Flex>

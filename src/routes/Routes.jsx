@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import App from "../App.jsx";
 import Layout from "../Layout.jsx";
-import Radiators from "../Radiators/Radiators.jsx";
-import Product from "../Product.jsx";
-import Basket from "../Basket.jsx";
+import Radiators from "../Components/Radiators.jsx";
+import Product from "../Pages/Product.jsx";
+import Basket from "../Pages/Basket.jsx";
 
 const Routers = () => {
   return (

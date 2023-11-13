@@ -1,10 +1,10 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import Carousel from "./Carousel/Carousel.jsx";
-import Cards from "./Cards/Cards.jsx";
-import Brands from "./Brands/Brands.jsx";
-import About from "./About/About.jsx";
-import Posters from "./Posters/Posters.jsx";
+import Carousel from "./Components/Carousel.jsx";
+import Cards from "./Components/Cards.jsx";
+import Brands from "./Components/Brands.jsx";
+import About from "./Components/About.jsx";
+import Posters from "./Components/Posters.jsx";
 
 const App = () => {
   return (

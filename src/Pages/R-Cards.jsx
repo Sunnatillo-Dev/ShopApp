@@ -1,10 +1,10 @@
 import { Box, Button, Grid, GridItem, Image, Text } from "@chakra-ui/react";
-import axios from 'https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm';
+import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RiShoppingCart2Line } from "react-icons/ri";
-import ParamContext from "./Context/Context";
+import ParamContext from "../Context/Context";
 
 const Rcards = () => {
   const [data, setState] = useState([]);
