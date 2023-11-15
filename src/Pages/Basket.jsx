@@ -10,34 +10,14 @@ import {
 
 const Basket = () => {
   let { PageID, setPageID } = useContext(ParamContext);
-  const [data, setData] = useState([]);
-
   const removeFromBasket = (itemId) => {
-    setPageID((prevPageID) => {
-      const newPageID = prevPageID.filter((item) => itemId !== item);
-      localStorage.setItem("PageID", JSON.stringify(newPageID));
-      return newPageID;
-    });
+    const newPageID = JSON.parse(localStorage.getItem("PageID")).filter(
+      (item) => itemId !== item.id
+    );
+    setPageID(newPageID);
+    localStorage.setItem("PageID", JSON.stringify(newPageID));
   };
-
-  useEffect(() => {
-    if (PageID.length > 0) {
-      const fetchData = async () => {
-        const requests = PageID.map((item) =>
-          axios.get(`https://dummyjson.com/products/${item}`)
-        );
-
-        const responses = await axios.all(requests);
-        const newData = responses.map((response) => response.data);
-        setData(newData);
-      };
-
-      fetchData();
-    } else {
-      setData([]);
-    }
-  }, [PageID]);
-
+  let newPageID = JSON.parse(localStorage.getItem("PageID"));
   return (
     <Container
       display={"flex"}
@@ -45,7 +25,7 @@ const Basket = () => {
       gap={"38px"}
       maxW={"1600px"}
     >
-      {data.map((item) => (
+      {newPageID.map((item) => (
         <Box
           p={"40px"}
           alignItems={"center"}

@@ -1,5 +1,6 @@
 import {
   Box,
+  Container,
   Flex,
   Heading,
   Image,
@@ -16,7 +17,7 @@ import bn1 from "../assets/image/bn1.png";
 import bn2 from "../assets/image/bn2.png";
 let Filter = ({ text, max, min }) => {
   return (
-    <Flex flexDir={"column"}>
+    <Flex width={"250px"} flexDir={"column"}>
       <Box display={"flex"} justifyContent={"space-between"}>
         <Text>{text}</Text>
         <AiOutlineClose />
@@ -55,18 +56,18 @@ let Filter = ({ text, max, min }) => {
 };
 const Radiators = () => {
   return (
-    <Box maxW={"1600px"} m={"0 auto"}>
+    <Container maxW={"1600px"} m={"0 auto"}>
       <Heading display={"block"} as={"h1"} my={"50px"}>
         Радиаторы
       </Heading>
-      <Box maxW={1600} gap={"80px"} display={"flex"} m={"0 auto"}>
+      <Box gap={"80px"} display={"flex"} m={"0 auto"}>
         <Box
-          width={"285px"}
+          width={"600px"}
           display={"flex"}
           flexDirection={"column"}
           gap={"24px"}
         >
-          <Filter text={"ЦЕНА"} min={"мин. цена"} max={"макс. цена"} />
+          <Filter text={"ЦЕНА"} min={"мин. "} max={"макс. "} />
           <Filter text={"ВЫСОТА, ММ"} min={"от 5"} max={"до 3000"} />
           <Filter text={"ГЛУБИНА, ММ"} min={"от 1"} max={"до 180"} />
           <Filter text={"ПЛОЩАДЬ ОБОГРЕВА, М²"} min={"от 76"} max={"до 3000"} />
@@ -76,7 +77,7 @@ const Radiators = () => {
         </Box>
         <Rcards />
       </Box>
-    </Box>
+    </Container>
   );
 };
 

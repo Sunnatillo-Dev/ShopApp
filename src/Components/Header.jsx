@@ -11,6 +11,7 @@ import ParamContext from "../Context/Context";
 function Header() {
   let navigate = useNavigate();
   let { PageID } = useContext(ParamContext);
+  let newPageID = JSON.parse(localStorage.getItem("PageID")).length;
   return (
     <Box width={"100%"} mb={"20px"} py={"40px"} bg={"#fff"}>
       <Container maxW={1600} m={"0 auto"}>
@@ -113,7 +114,7 @@ function Header() {
             <Text
               userSelect={"none"}
               top={"-7px"}
-              backgroundColor={PageID.length ? "green" : ""}
+              backgroundColor={newPageID ? "green" : ""}
               width={"20px"}
               height={"20px"}
               borderRadius={"50px"}
@@ -122,7 +123,7 @@ function Header() {
               right={"-7px"}
               position={"absolute"}
             >
-              {PageID.length ? PageID.length : ""}
+              {newPageID ? newPageID : ""}
             </Text>
           </Box>
         </Flex>
