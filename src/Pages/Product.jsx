@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 import {
   Box,
   Button,
