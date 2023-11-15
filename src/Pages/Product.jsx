@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import {
   Box,
   Button,
@@ -7,20 +10,17 @@ import {
   SkeletonText,
   Text,
 } from "@chakra-ui/react";
-import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
-
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import SliderC from "../Components/sliderC.jsx";
+import SliderC from "../Components/sliderC";
 
 const Product = () => {
-  let params = useParams().id;
-  let [data, setData] = useState({});
+  const { id } = useParams();
+  const [data, setData] = useState({});
+
   useEffect(() => {
     axios
-      .get(`https://dummyjson.com/products/${params}`)
+      .get(`https://dummyjson.com/products/${id}`)
       .then((result) => setData(result.data));
-  }, []);
+  }, [id]);
 
   let images = Array.isArray(data.images) ? [...data.images] : [];
 

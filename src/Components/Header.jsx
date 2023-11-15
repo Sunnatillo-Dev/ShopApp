@@ -11,7 +11,8 @@ import ParamContext from "../Context/Context";
 function Header() {
   let navigate = useNavigate();
   let { PageID } = useContext(ParamContext);
-  let newPageID = JSON.parse(localStorage.getItem("PageID")).length || [];
+  let newPageID =
+    JSON.parse(localStorage.getItem("PageID")).length || [].length;
   return (
     <Box width={"100%"} mb={"20px"} py={"40px"} bg={"#fff"}>
       <Container maxW={1600} m={"0 auto"}>
