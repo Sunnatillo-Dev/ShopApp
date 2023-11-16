@@ -16,29 +16,50 @@ import { RiShoppingCart2Line } from "react-icons/ri";
 import ParamContext from "../Context/Context";
 
 const Rcards = () => {
+  let { total, setTotal } = useContext(ParamContext);
   const [data, setState] = useState([]);
+  const [isAddedTextVisible, setIsAddedTextVisible] = useState({});
+  let ToOtherPage = useNavigate();
+  let { PageID, setPageID } = useContext(ParamContext);
+
   useEffect(() => {
     axios
       .get("https://dummyjson.com/products")
       .then((result) => setState(result.data.products));
   }, []);
 
-  let ToOtherPage = useNavigate();
-  let { PageID, setPageID } = useContext(ParamContext);
+  useEffect(() => {
+    // Initialize the isAddedTextVisible state based on localStorage
+    const initialIsAddedTextVisible = {};
+    PageID.forEach((item) => {
+      initialIsAddedTextVisible[item.id] = JSON.parse(
+        localStorage.getItem(`isInBasket_${item.id}`)
+      );
+    });
+    setIsAddedTextVisible(initialIsAddedTextVisible);
+  }, [PageID]);
 
   const isItemInBasket = (item) => PageID.includes(item);
-
   const handleAddToBasket = (item) => {
+    const updatedPageID = [...PageID, item];
+    setTotal(total + item.price);
+    localStorage.setItem("total", JSON.stringify(total));
+
     if (
       !JSON.parse(localStorage.getItem("PageID")).some(
-        (item2) => item2.id == item.id
+        (item2) => item2.id === item.id
       )
     ) {
-      setPageID([...PageID, item]);
-      localStorage.setItem("PageID", JSON.stringify(PageID));
+      setPageID(updatedPageID);
+      localStorage.setItem("PageID", JSON.stringify(updatedPageID));
     }
 
-    localStorage.setItem("PageID", JSON.stringify([...PageID, item]));
+    localStorage.setItem(`isInBasket_${item.id}`, JSON.stringify(true));
+
+    setIsAddedTextVisible((prev) => ({
+      ...prev,
+      [item.id]: true,
+    }));
   };
 
   return (
@@ -47,7 +68,17 @@ const Rcards = () => {
         {data.length ? (
           data.slice(0, 12).map((item) => {
             const isInBasket = isItemInBasket(item);
-
+            const addedTextVisible = isAddedTextVisible[item.id];
+            let buttonText;
+            if (isInBasket) {
+              if (addedTextVisible) {
+                buttonText = "Added !";
+              } else {
+                buttonText = " Add to Basket";
+              }
+            } else {
+              buttonText = " Add to Basket";
+            }
             return (
               <GridItem
                 width={"400px"}
@@ -132,7 +163,7 @@ const Rcards = () => {
                       !isInBasket ? handleAddToBasket(item) : "";
                     }}
                   >
-                    {isInBasket ? "Added !" : " Add to Basket"}
+                    {buttonText}
                   </Button>
                   <Button
                     colorScheme="teal"

@@ -1,14 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import ParamContext from "../Context/Context";
 import { Box, Button, Container, Image, Text } from "@chakra-ui/react";
-import {
-  AiOutlinePlusCircle,
-  AiOutlineMinusCircle,
-  AiOutlineClose,
-} from "react-icons/ai";
+import BasketCard from "../Components/basket.card";
 
 const Basket = () => {
-  let { PageID, setPageID } = useContext(ParamContext);
+  const { setPageID, total, setTotal } = useContext(ParamContext);
+
   const removeFromBasket = (itemId) => {
     const newPageID = JSON.parse(localStorage.getItem("PageID")).filter(
       (item) => itemId !== item.id
@@ -16,108 +13,53 @@ const Basket = () => {
     setPageID(newPageID);
     localStorage.setItem("PageID", JSON.stringify(newPageID));
   };
-  let newPageID = JSON.parse(localStorage.getItem("PageID"));
+
+  const handleQuantityChange = (itemId, newQuantity) => {
+    const newPageID = JSON.parse(localStorage.getItem("PageID")).map((item) =>
+      item.id === itemId
+        ? { ...item, quantity: newQuantity, total: item.price * newQuantity }
+        : item
+    );
+    setPageID(newPageID);
+    localStorage.setItem("PageID", JSON.stringify(newPageID));
+  };
+
+  const newPageID = JSON.parse(localStorage.getItem("PageID"));
+
   return (
     <Container
-      display={"flex"}
-      flexDirection={"column"}
-      gap={"38px"}
       maxW={"1600px"}
+      justifyContent={"space-between"}
+      display={"flex"}
     >
-      {newPageID.map((item) => (
-        <Box
-          p={"40px"}
-          alignItems={"center"}
-          maxW={"1030px"}
-          height={"260px"}
-          gap={"30px"}
-          bg={"#fff"}
-          display={"flex"}
-          key={item.id}
-          justifyContent={"space-between"}
-        >
-          <Box
-            display={"flex"}
-            alignItems={"center"}
-            gap={"30px"}
-            height={"150px"}
-          >
-            <Image
-              height={"180px"}
-              objectFit={"cover"}
-              width={"180px"}
-              src={item.thumbnail}
+      <Box display={"flex"} flexDirection={"column"} gap={"38px"}>
+        {newPageID.map((item) => {
+          return (
+            <BasketCard
+              key={item.id}
+              item={item}
+              func={removeFromBasket}
+              onQuantityChange={handleQuantityChange}
             />
-            <Box
-              py={"10px"}
-              height={"100%"}
-              display={"flex"}
-              flexDirection={"column"}
-              justifyContent={"space-between"}
-            >
-              <Text
-                color="#4B4B4B"
-                fontSize="24px"
-                fontStyle="normal"
-                fontWeight="500"
-                lineHeight="normal"
-              >
-                {item.title}
-              </Text>
-              <Box alignItems={"center"} gap={"10px "} display={"flex"}>
-                <Text>Количество:</Text>
-                <Box display={"flex"} alignItems={"center"} gap={"10px"}>
-                  <Button minW={0} variant={"unstyled"}>
-                    <AiOutlineMinusCircle />
-                  </Button>
-                  <Text>{1}</Text>
-                  <Button minW={0} variant={"unstyled"}>
-                    <AiOutlinePlusCircle />
-                  </Button>
-                </Box>
-              </Box>
-              <Box display={"flex"} alignItems={"center"} gap={"10px"}>
-                <Text>Цена за едeницу:</Text>
-                <Text
-                  color="#4B4B4B"
-                  fontSize="20px"
-                  fontStyle="normal"
-                  fontWeight="500"
-                  lineHeight="normal"
-                  textTransform="uppercase"
-                >
-                  {item.price} ₽
-                </Text>
-              </Box>
-            </Box>
-          </Box>
-          <Box
-            display={"flex"}
-            flexDir={"column"}
-            justifyContent={"space-between"}
-            height={"150px"}
-            alignItems={"flex-end"}
-          >
-            <Button
-              onClick={() => removeFromBasket(item.id)}
-              variant={"unstyled"}
-            >
-              <AiOutlineClose fontSize={"20px"} />
-            </Button>
-            {/* For now */}
-            <Text
-              color="#4B4B4B"
-              fontSize="24px"
-              fontStyle="normal"
-              fontWeight="700"
-              lineHeight="normal"
-              textTransform="uppercase"
-            >
-              {item.price} ₽
-            </Text>
-          </Box>
+          );
+        })}
+      </Box>
+      {newPageID.length ? (
+        <Box
+          display={"flex"}
+          flexDir={"column"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          width={"400px"}
+          height={"400px"}
+          bg={"white"}
+        >
+          <Text fontSize={"30px"}>Total Sum</Text>
+          <Text fontSize={"30px"}>{total} ₽</Text>
         </Box>
-      ))}
+      ) : (
+        ""
+      )}
     </Container>
   );
 };

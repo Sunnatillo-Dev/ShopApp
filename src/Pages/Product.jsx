@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "https://cdn.jsdelivr.net/npm/axios@1.3.5/+esm";
 import {
@@ -11,6 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import SliderC from "../Components/sliderC";
+import ParamContext from "../Context/Context";
 
 const Product = () => {
   const { id } = useParams();
